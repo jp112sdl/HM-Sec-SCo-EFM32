@@ -24,7 +24,8 @@ HM-Sec-SCo PRG Pinout
 - **1.)** Install Arduino IDE 1.8.5 or higher
 - **2.)** within Arduino IDE install Board-Support "Arduino SAMD Boards (32-bits ARM Cortex-M0+)" _OR_ download the [GNU ARM Embedded Toolchain](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads) GCC ver 5.4.1-2016q2.
 - **3.)** Clone EFM32 Board Support from https://github.com/jp112sdl/ARDUINO_EFM32 to your Arduino folder
-- **4.)** Install [OpenOCD](https://openocd.org) (i.e. on MacOS simply using `brew install openocd`)
+- **4.)** Dowload AskSinPP [`dev_efm32`](https://github.com/jp112sdl/AskSinPP/tree/dev_efm32) Branch (Code->Download ZIP) and extract it to the Arduino libraries directory
+- **5.)** Install [OpenOCD](https://openocd.org) (i.e. on MacOS simply using `brew install openocd`)
 
 ### Hardware part
 - **1.)** Connect ST-LinkV2 to the PCB using 4 wires (GND, 3.3V, SWCL, SWDIO)
