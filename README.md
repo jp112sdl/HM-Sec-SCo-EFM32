@@ -42,4 +42,4 @@ reset_config none
 reset init
 ```
 - **3.)** _for debugging it is helpful to connect a FTDI interface to the TX pin to read serial debug messages_
-
+- **4.)** Upload code with `/usr/local/bin/openocd -f interface/stlink-dap.cfg -f target/efm32.cfg -c "program /path/to/.elf verify reset exit"`
