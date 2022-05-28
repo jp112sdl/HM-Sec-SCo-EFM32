@@ -14,7 +14,7 @@ Homebrew firmware for the HM-Sec-SCo, that can also be used with an HmIP-SWDO an
 
 <hr/>
 
-HM-Sec-SCo PRG Pinout
+HM-Sec-SCo PRG1 Pinout
 
 ![pinout](hm-sec-sco-pcb_pinout.png)
 
@@ -28,7 +28,7 @@ HM-Sec-SCo PRG Pinout
 - **5.)** Install [OpenOCD](https://openocd.org) (i.e. on MacOS simply using `brew install openocd`)
 
 ### Hardware part
-- **1.)** Connect ST-LinkV2 to the PCB using 4 wires (GND, 3.3V, SWCL, SWDIO)
+- **1.)** Connect ST-LinkV2 to the PCB PRG1 pads using 4 wires (GND, 3.3V, SWCL, SWDIO)
 - **2.)** Unlock SWD access
   - start OpenOCD with `openocd -f interface/stlink-dap.cfg -f target/efm32.cfg`
   - connect to openocd using `telnet localhost 4444`
