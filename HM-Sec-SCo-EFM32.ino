@@ -141,6 +141,7 @@ public:
 
     _position = state;
   }
+  uint32_t interval () { return millis2ticks(500); }
 };
 
 class SCoChannel : public StateGenericChannel<SCoOptPosition,Hal,SCOList0,SCOList1,List4,PEERS_PER_CHANNEL> {
