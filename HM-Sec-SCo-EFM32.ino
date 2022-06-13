@@ -190,8 +190,8 @@ void loop() {
   bool poll = sdev.pollRadio();
   if( worked == false && poll == false ) {
     if( hal.battery.critical() ) {
-    //  hal.activity.sleepForever(hal);
+      hal.activity.sleepForever(hal);
     }
-   // hal.activity.savePower<Sleep<> >(hal);
+    hal.activity.savePower<Sleep >(hal);
   }
 }
