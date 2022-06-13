@@ -9,7 +9,7 @@ Homebrew firmware for the HM-Sec-SCo, that can also be used with an HmIP-SWDO an
   - [x] internal vcc measurement
   - [x] external battery measurement
   - [x] use address/serial from unique chip id
-  - [ ] Sleep-Mode
+  - [x] Sleep-Mode
 - [x] Unlock SWD interface
 - [x] Upload code with ST-Link V2 using [OpenOCD](https://openocd.org)
 
