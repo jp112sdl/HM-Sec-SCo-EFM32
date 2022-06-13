@@ -183,6 +183,8 @@ void setup () {
   GPIO_DriveModeSet(gpioPortB, gpioDriveModeLowest);
   GPIO_DriveModeSet(gpioPortC, gpioDriveModeLowest);
   GPIO_DriveModeSet(gpioPortD, gpioDriveModeLowest);
+
+  hal.activity.stayAwake(seconds2ticks(5));
 }
 
 void loop() {
