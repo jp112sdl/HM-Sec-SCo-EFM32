@@ -166,6 +166,11 @@ void setup () {
   DPRINT(F("FlashSize:   ")); DDEC(SYSTEM_GetFlashSize()); DPRINTLN(F("kB"));
   DPRINT(F("PageSize:    ")); DDEC(SYSTEM_GetFlashPageSize()); DPRINTLN(F("byte"));
   DPRINT(F("ResetCause:  ")); DDECLN(resetCause);
+
+  GPIO_DriveModeSet(gpioPortA, gpioDriveModeLowest);
+  GPIO_DriveModeSet(gpioPortB, gpioDriveModeLowest);
+  GPIO_DriveModeSet(gpioPortC, gpioDriveModeLowest);
+  GPIO_DriveModeSet(gpioPortD, gpioDriveModeLowest);
 }
 
 void loop() {
