@@ -30,7 +30,9 @@
 #define SENS_PIN                PD5
 #define SENS_EN_PIN1            PB13
 #define SENS_EN_PIN2            PB14
-#define OPT_TRG_LEVEL_LESS_THAN 3800
+
+#define OPT_TRG_LEVEL_LOW       2800
+#define OPT_TRG_LEVEL_HIGH      3700
 
 #define TRX_CS                PC14
 #define TRX_GDO0              PC15
@@ -127,7 +129,17 @@ public:
     digitalWrite(en1,LOW);
     digitalWrite(en2,LOW);
     //DPRINT("value=");DDECLN(value);
-    _position = ( value < OPT_TRG_LEVEL_LESS_THAN) ? State::PosA : State::PosB;
+    static uint8_t state = State::PosA;
+
+    if (state == State::PosA && value < OPT_TRG_LEVEL_LOW) {
+      state = State::PosB;
+    }
+
+    if (state == State::PosB && value > OPT_TRG_LEVEL_HIGH) {
+      state = State::PosA;
+    }
+
+    _position = state;
   }
 };
 
