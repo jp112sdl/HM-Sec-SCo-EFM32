@@ -120,7 +120,7 @@ public:
     pinMode(sens,INPUT);
   }
 
-  void measure (__attribute__((unused)) bool async=false) {
+  void measure (__attribute__((unused)) bool async=false)  __attribute__((optimize("-O0"))) {
     digitalWrite(en1,HIGH);
     _delay_us(20);
     digitalWrite(en2,HIGH);
