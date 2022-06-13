@@ -8,8 +8,8 @@
 //#include <WireSoft.h>
 //TwoWireSoft Wire(SDA, SCL);
 
-
-#define HIDE_IGNORE_MSG
+//#define HIDE_IGNORE_MSG
+#define NDEBUG
 
 #include "aes_secret.h"
 
