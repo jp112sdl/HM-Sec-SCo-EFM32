@@ -166,6 +166,7 @@ void setup () {
   uint32_t resetCause = RMU_ResetCauseGet();
   RMU_ResetCauseClear();
   DINIT(57600,ASKSIN_PLUS_PLUS_IDENTIFIER);
+  DPRINT(F("ResetCause:  ")); DDECLN(resetCause);
 #ifdef _WIRESOFT_H_
   Wire.begin();
 #endif
@@ -178,7 +179,6 @@ void setup () {
   DPRINT(F("SRAMSize:    ")); DDEC(SYSTEM_GetSRAMSize()); DPRINTLN(F("kB"));
   DPRINT(F("FlashSize:   ")); DDEC(SYSTEM_GetFlashSize()); DPRINTLN(F("kB"));
   DPRINT(F("PageSize:    ")); DDEC(SYSTEM_GetFlashPageSize()); DPRINTLN(F("byte"));
-  DPRINT(F("ResetCause:  ")); DDECLN(resetCause);
 
   GPIO_DriveModeSet(gpioPortA, gpioDriveModeLowest);
   GPIO_DriveModeSet(gpioPortB, gpioDriveModeLowest);
