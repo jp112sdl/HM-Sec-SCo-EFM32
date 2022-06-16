@@ -46,7 +46,7 @@
 #define BATT_SENSOR BatterySensor
 #endif
 
-#include <SoftSPI.h>
+#include <SPI.h>
 #include <AskSinPP.h>
 #include <Register.h>
 #include <ContactState.h>
