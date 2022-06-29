@@ -26,7 +26,6 @@ HM-Sec-SCo PRG1 Pinout
 - **2.)** [Add third party board support](https://support.arduino.cc/hc/en-us/articles/360016466340-Add-or-remove-third-party-boards-in-Boards-Manager) from `https://raw.githubusercontent.com/jp112sdl/ARDUINO_EFM32/master/package/package_ARDUINO_EFM32_index.json`
 - **3.)** Search for "efm32" and install the board
 - **4.)** Download AskSinPP [`dev_efm32`](https://github.com/jp112sdl/AskSinPP/tree/dev_efm32) Branch (Code->Download ZIP) and extract it to the Arduino libraries directory
-- **5.)** Install [OpenOCD](https://openocd.org) (i.e. on MacOS simply using `brew install openocd`)
 
 ### Hardware part
 - **1.)** Connect ST-LinkV2 to the PCB PRG1 pads using 4 wires (GND, 3.3V, SWCL, SWDIO)
