@@ -63,7 +63,9 @@ const struct DeviceInfo PROGMEM devinfo = {
 };
 
 typedef LibSPI<TRX_CS> SPIType;
-typedef Radio<SPIType,TRX_GDO0> RadioType;
+//typedef CC1101Radio<SPIType,TRX_GDO0> RadioType;
+typedef Si4431Radio<SPIType,TRX_GDO0> RadioType;
+
 typedef DualStatusLed<LED1_PIN,LED2_PIN> LedType;
 typedef AskSin<LedType,BATT_SENSOR,RadioType> BaseHal;
 class Hal : public BaseHal {
