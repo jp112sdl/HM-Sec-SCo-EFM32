@@ -186,8 +186,22 @@ void setup () {
   GPIO_DriveModeSet(gpioPortB, gpioDriveModeLowest);
   GPIO_DriveModeSet(gpioPortC, gpioDriveModeLowest);
   GPIO_DriveModeSet(gpioPortD, gpioDriveModeLowest);
+  GPIO_DriveModeSet(gpioPortE, gpioDriveModeLowest);
+  GPIO_DriveModeSet(gpioPortF, gpioDriveModeLowest);
+
+  // https://www.silabs.com/documents/public/application-notes/an0027.pdf
+  // 2.1 GPIO Leakage, unused pins should be disabled
+  pinMode(PA2,  gpioModeDisabled);
+  pinMode(PB7,  gpioModeDisabled);
+  pinMode(PB11, gpioModeDisabled);
+  pinMode(PE13, gpioModeDisabled);
+  pinMode(PF0,  gpioModeDisabled);
+  pinMode(PF1,  gpioModeDisabled);
+  pinMode(PF2,  gpioModeDisabled);
 
   hal.activity.stayAwake(seconds2ticks(5));
+
+  //HMID id = sdev.getMasterID();id.dump();DPRINTLN("");
 }
 
 void loop() {
