@@ -4,16 +4,21 @@
 // 2022-05-26 jp112sdl Creative Commons - http://creativecommons.org/licenses/by-nc-sa/4.0/de/
 //- -----------------------------------------------------------------------------------------------------------------------
 
-//#define STORAGEDRIVER m24mXX<0x0A,512,256>
-//#include <WireSoft.h>
-//TwoWireSoft Wire(SDA, SCL);
+
+// #define USE_HM_SEC_SCO
+#define USE_HW_SERIAL
+//#include "aes_secret.h"
+
+
+#ifndef USE_HM_SEC_SCO
+// HM-Sec-SCo has no external eeprom
+#define STORAGEDRIVER m24mXX<0x0A,512,256>
+#include <WireSoft.h>
+TwoWireSoft Wire(SDA, SCL);
+#endif
 
 //#define HIDE_IGNORE_MSG
 #define NDEBUG
-
-#include "aes_secret.h"
-
-#define USE_HW_SERIAL
 
 #define ADC_CLOCK               11000000        /* ADC conversion clock */
 #define ADC_16BIT_MAX           65536           /* 2^16 */
@@ -25,14 +30,17 @@
 #define SABOTAGE_PIN          PB8
 #define SABOTAGE_ACTIVE_STATE HIGH
 
+#ifdef USE_HM_SEC_SCO
+//HM-Sec-SCo uses StepUp converter with single AAA battery
 #define BATT_MEASURE_CH   adcSingleInputCh4 //PD4
+#endif
 
 #define SENS_PIN                PD5
 #define SENS_EN_PIN1            PB13
 #define SENS_EN_PIN2            PB14
 
-#define OPT_TRG_LEVEL_LOW       2800
-#define OPT_TRG_LEVEL_HIGH      3700
+#define OPT_TRG_LEVEL_LOW       3100
+#define OPT_TRG_LEVEL_HIGH      3800
 
 #define TRX_CS                PC14
 #define TRX_GDO0              PC15
@@ -54,17 +62,21 @@
 using namespace as;
 
 const struct DeviceInfo PROGMEM devinfo = {
-    {0x03,0xc7,0x01},       // Device ID
-    "JPSCOEFM01",           // Device Serial
+    {0x4e,0x51,0x18},       // Device ID
+    "NEQ0942692",           // Device Serial
     {0x00,0xC7},            // Device Model
-    0x20,                   // Firmware Version
+    0x10,                   // Firmware Version
     as::DeviceType::ThreeStateSensor, // Device Type
     {0x01,0x00}             // Info Bytes
 };
 
 typedef LibSPI<TRX_CS> SPIType;
-//typedef CC1101Radio<SPIType,TRX_GDO0> RadioType;
+
+#ifdef USE_HM_SEC_SCO
 typedef Si4431Radio<SPIType,TRX_GDO0> RadioType;
+#else
+typedef CC1101Radio<SPIType,TRX_GDO0> RadioType;
+#endif
 
 typedef DualStatusLed<LED1_PIN,LED2_PIN> LedType;
 typedef AskSin<LedType,BATT_SENSOR,RadioType> BaseHal;
@@ -74,7 +86,7 @@ public:
     BaseHal::init(id);
     led.invert(true);
     // measure battery every 1h
-    battery.init(seconds2ticks(60UL*60),sysclock);
+    battery.init(seconds2ticks(60UL*60*1),sysclock);
     battery.low(12);
     battery.critical(11);
   }
@@ -165,10 +177,7 @@ SCOType sdev(devinfo,0x20);
 ConfigButton<SCOType, HIGH, LOW, INPUT_PULLUP> cfgBtn(sdev);
 
 void setup () {
-  uint32_t resetCause = RMU_ResetCauseGet();
-  RMU_ResetCauseClear();
   DINIT(57600,ASKSIN_PLUS_PLUS_IDENTIFIER);
-  DPRINT(F("ResetCause:  ")); DDECLN(resetCause);
 #ifdef _WIRESOFT_H_
   Wire.begin();
 #endif
@@ -200,8 +209,6 @@ void setup () {
   pinMode(PF2,  gpioModeDisabled);
 
   hal.activity.stayAwake(seconds2ticks(5));
-
-  //HMID id = sdev.getMasterID();id.dump();DPRINTLN("");
 }
 
 void loop() {
