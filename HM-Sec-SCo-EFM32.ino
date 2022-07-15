@@ -177,6 +177,10 @@ SCOType sdev(devinfo,0x20);
 ConfigButton<SCOType, HIGH, LOW, INPUT_PULLUP> cfgBtn(sdev);
 
 void setup () {
+  GPIO_DbgSWOEnable(true);
+  GPIO_DbgSWDIOEnable(true);
+  GPIO_DbgSWDClkEnable(true);
+
   DINIT(57600,ASKSIN_PLUS_PLUS_IDENTIFIER);
 #ifdef _WIRESOFT_H_
   Wire.begin();
@@ -208,7 +212,11 @@ void setup () {
   pinMode(PF1,  gpioModeDisabled);
   pinMode(PF2,  gpioModeDisabled);
 
-  hal.activity.stayAwake(seconds2ticks(5));
+  hal.activity.stayAwake(seconds2ticks(3));
+
+  GPIO_DbgSWOEnable(false);
+  GPIO_DbgSWDIOEnable(false);
+  GPIO_DbgSWDClkEnable(false);
 }
 
 void loop() {
