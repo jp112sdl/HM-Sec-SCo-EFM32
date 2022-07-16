@@ -214,6 +214,11 @@ void setup () {
 
 void loop() {
   bool worked = hal.runready();
+
+  if (sdev.channel(1).changed() == true) {
+    hal.battery.meter().start();
+  }
+
   bool poll = sdev.pollRadio();
   if( worked == false && poll == false ) {
     if( hal.battery.critical() ) {
