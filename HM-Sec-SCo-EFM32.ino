@@ -111,11 +111,11 @@ public:
   SCOList1 (uint16_t addr) : RegList1<Reg1>(addr) {}
   void defaults () {
     clear();
-    msgForPosA(1); // CLOSED
-    msgForPosB(2); // OPEN
+    msgForPosA(2); // OPEN
+    msgForPosB(1); // CLOSED
     aesActive(true);
     eventDelaytime(0);
-    ledOntime(100);
+    ledOntime(0);
     transmitTryMax(6);
   }
 };
