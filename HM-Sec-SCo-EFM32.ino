@@ -92,7 +92,7 @@ public:
   }
 } hal;
 
-DEFREGISTER(Reg0,DREG_INTKEY,DREG_CYCLICINFOMSG,MASTERID_REGS,DREG_TRANSMITTRYMAX,DREG_SABOTAGEMSG)
+DEFREGISTER(Reg0,MASTERID_REGS,DREG_CYCLICINFOMSG,DREG_SABOTAGEMSG,DREG_LOCALRESETDISABLE,DREG_TRANSMITTRYMAX)
 class SCOList0 : public RegList0<Reg0> {
 public:
   SCOList0(uint16_t addr) : RegList0<Reg0>(addr) {}
@@ -101,6 +101,7 @@ public:
     cycleInfoMsg(true);
     transmitDevTryMax(6);
     sabotageMsg(true);
+    localResetDisable(false);
   }
 };
 
