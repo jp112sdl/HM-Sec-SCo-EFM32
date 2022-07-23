@@ -5,9 +5,9 @@
 //- -----------------------------------------------------------------------------------------------------------------------
 
 
-// #define USE_HM_SEC_SCO
+#define USE_HM_SEC_SCO
 #define USE_HW_SERIAL
-//#include "aes_secret.h"
+#include "aes_secret.h"
 
 
 #ifndef USE_HM_SEC_SCO
@@ -39,7 +39,7 @@ TwoWireSoft Wire(SDA, SCL);
 #define SENS_EN_PIN1            PB13
 #define SENS_EN_PIN2            PB14
 
-#define OPT_TRG_LEVEL_LOW       3100
+#define OPT_TRG_LEVEL_LOW       3400
 #define OPT_TRG_LEVEL_HIGH      3800
 
 #define TRX_CS                PC14
@@ -216,6 +216,15 @@ void setup () {
 void loop() {
   bool worked = hal.runready();
 
+  if (sdev.channel(1).msgSent() == true) {
+    sdev.channel(1).msgSent(false);
+    //measure battery voltage after a message was sent
+    hal.battery.meter().start();
+    //restart the cycle alarm if an open/close message was sent
+    sdev.restartCycleTimer();
+  }
+
+  //measure battery voltage on any info message (cycle, sabotage)
   if (sdev.channel(1).changed() == true) {
     hal.battery.meter().start();
   }
