@@ -39,7 +39,7 @@ TwoWireSoft Wire(SDA, SCL);
 #define SENS_EN_PIN1            PB13
 #define SENS_EN_PIN2            PB14
 
-#define OPT_TRG_LEVEL_LOW       3400
+#define OPT_TRG_LEVEL_LOW       3100
 #define OPT_TRG_LEVEL_HIGH      3800
 
 #define TRX_CS                PC14
