@@ -20,7 +20,7 @@ TwoWireSoft Wire(SDA, SCL);
 //#define HIDE_IGNORE_MSG
 #define NDEBUG
 
-#define ADC_CLOCK               11000000        /* ADC conversion clock */
+#define ADC_CLOCK               400000        /* ADC conversion clock */
 #define ADC_16BIT_MAX           65536           /* 2^16 */
 
 #define LED1_PIN          PA1
@@ -35,7 +35,7 @@ TwoWireSoft Wire(SDA, SCL);
 #define BATT_MEASURE_CH   adcSingleInputCh4 //PD4
 #endif
 
-#define SENS_PIN                PD5
+#define SENS_CH                 adcSingleInputCh5
 #define SENS_EN_PIN1            PB13
 #define SENS_EN_PIN2            PB14
 
@@ -132,7 +132,29 @@ public:
     en2 = enpin2;
     pinMode(en1, OUTPUT);
     pinMode(en2, OUTPUT);
-    pinMode(sens,INPUT);
+  }
+
+  uint16_t readADC(const ADC_SingleInput_TypeDef input) {
+    static bool first = true;
+    if (first) {
+      first = false;
+      CMU_ClockEnable(cmuClock_ADC0, true);
+      ADC_Init_TypeDef init = ADC_INIT_DEFAULT;
+      init.timebase = ADC_TimebaseCalc(0);
+      init.prescale = ADC_PrescaleCalc(ADC_CLOCK, 0);
+      ADC_Init(ADC0, &init);
+    }
+
+    ADC_InitSingle_TypeDef sInit = ADC_INITSINGLE_DEFAULT;
+    sInit.input = input;
+    sInit.reference = adcRef1V25;
+    sInit.acqTime = adcAcqTime32;
+    ADC_InitSingle(ADC0, &sInit);
+    ADC_Start(ADC0, adcStartSingle);
+
+    while ( ADC0->STATUS & ADC_STATUS_SINGLEACT);
+
+    return ADC_DataSingleGet(ADC0);
   }
 
   void measure (__attribute__((unused)) bool async=false)  __attribute__((optimize("-O0"))) {
@@ -140,7 +162,9 @@ public:
     _delay_us(20);
     digitalWrite(en2,HIGH);
     _delay_us(50);
-    uint16_t value= analogRead(sens);
+
+    uint16_t value = readADC(SENS_CH);
+
     digitalWrite(en1,LOW);
     digitalWrite(en2,LOW);
     //DPRINT("value=");DDECLN(value);
@@ -184,7 +208,7 @@ void setup () {
 #endif
   sdev.init(hal);
   buttonISR(cfgBtn,CONFIG_BUTTON_PIN);
-  sdev.channel(1).init(SENS_PIN, SENS_EN_PIN1, SENS_EN_PIN2, SABOTAGE_PIN);
+  sdev.channel(1).init(SENS_CH, SENS_EN_PIN1, SENS_EN_PIN2, SABOTAGE_PIN);
   sdev.initDone();
   DDEVINFO(sdev);
   DPRINT(F("HW Revision: ")); DDECLN(SYSTEM_GetProdRev());
