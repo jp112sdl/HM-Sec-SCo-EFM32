@@ -191,8 +191,8 @@ public:
   ~SCoChannel () {}
 
   void init (uint8_t pin, uint8_t en1, uint8_t en2, uint8_t sab) {
-    BaseChannel::init(sab);
     BaseChannel::possens.init(pin, en1, en2);
+    BaseChannel::init(sab);
   }
 };
 
