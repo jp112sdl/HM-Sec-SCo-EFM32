@@ -163,8 +163,15 @@ public:
 
     digitalWrite(en1,LOW);
     digitalWrite(en2,LOW);
-    //DPRINT("value=");DDECLN(value);
-    static uint8_t state = State::PosA;
+    DPRINT("value=");DDECLN(value);
+    static uint8_t state = State::NoPos;
+
+    static bool first = true;
+    if (first == true) {
+      first = false;
+      _position = state;
+      return;
+    }
 
     if (state == State::PosA && value < OPT_TRG_LEVEL_LOW) {
       state = State::PosB;
