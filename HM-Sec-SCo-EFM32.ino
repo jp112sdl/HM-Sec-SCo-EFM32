@@ -132,19 +132,15 @@ public:
     en2 = enpin2;
     pinMode(en1, OUTPUT);
     pinMode(en2, OUTPUT);
+
+    CMU_ClockEnable(cmuClock_ADC0, true);
+    ADC_Init_TypeDef init = ADC_INIT_DEFAULT;
+    init.timebase = ADC_TimebaseCalc(0);
+    init.prescale = ADC_PrescaleCalc(ADC_CLOCK, 0);
+    ADC_Init(ADC0, &init);
   }
 
   uint16_t readADC(const ADC_SingleInput_TypeDef input) {
-    static bool first = true;
-    if (first) {
-      first = false;
-      CMU_ClockEnable(cmuClock_ADC0, true);
-      ADC_Init_TypeDef init = ADC_INIT_DEFAULT;
-      init.timebase = ADC_TimebaseCalc(0);
-      init.prescale = ADC_PrescaleCalc(ADC_CLOCK, 0);
-      ADC_Init(ADC0, &init);
-    }
-
     ADC_InitSingle_TypeDef sInit = ADC_INITSINGLE_DEFAULT;
     sInit.input = input;
     sInit.reference = adcRef1V25;
