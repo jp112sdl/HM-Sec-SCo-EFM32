@@ -173,11 +173,11 @@ public:
       return;
     }
 
-    if (state == State::PosA && value < OPT_TRG_LEVEL_LOW) {
+    if (state != State::PosB && value < OPT_TRG_LEVEL_LOW) {
       state = State::PosB;
     }
 
-    if (state == State::PosB && value > OPT_TRG_LEVEL_HIGH) {
+    if (state != State::PosA && value > OPT_TRG_LEVEL_HIGH) {
       state = State::PosA;
     }
 
