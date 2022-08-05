@@ -211,7 +211,6 @@ void setup () {
 #endif
   sdev.init(hal);
   buttonISR(cfgBtn,CONFIG_BUTTON_PIN);
-  sdev.channel(1).init(SENS_CH, SENS_EN_PIN1, SENS_EN_PIN2, SABOTAGE_PIN);
   sdev.initDone();
   DDEVINFO(sdev);
   DPRINT(F("HW Revision: ")); DDECLN(SYSTEM_GetProdRev());
@@ -235,6 +234,8 @@ void setup () {
   pinMode(PF0,  gpioModeDisabled);
   pinMode(PF1,  gpioModeDisabled);
   pinMode(PF2,  gpioModeDisabled);
+
+  sdev.channel(1).init(SENS_CH, SENS_EN_PIN1, SENS_EN_PIN2, SABOTAGE_PIN);
 
   hal.activity.stayAwake(seconds2ticks(3));
 
