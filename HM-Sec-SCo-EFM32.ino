@@ -231,7 +231,7 @@ void setup () {
 
   sdev.channel(1).init(SENS_CH, SENS_EN_PIN1, SENS_EN_PIN2, SABOTAGE_PIN);
 
-  hal.activity.stayAwake(seconds2ticks(3));
+  hal.activity.stayAwake(seconds2ticks(5));
 
 }
 
