@@ -2,12 +2,13 @@
 // AskSin++
 // 2016-10-31 papa Creative Commons - http://creativecommons.org/licenses/by-nc-sa/3.0/de/
 // 2022-05-26 jp112sdl Creative Commons - http://creativecommons.org/licenses/by-nc-sa/4.0/de/
+// ci-test=yes board=efm32 aes=no
 //- -----------------------------------------------------------------------------------------------------------------------
 
 
 #define USE_HM_SEC_SCO
 #define USE_HW_SERIAL
-#include "aes_secret.h"
+//#include "aes_secret.h"
 
 
 #ifndef USE_HM_SEC_SCO
