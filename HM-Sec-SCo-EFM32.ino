@@ -6,7 +6,7 @@
 //- -----------------------------------------------------------------------------------------------------------------------
 
 
-#define USE_HM_SEC_SCO
+//#define USE_HM_SEC_SCO
 #define USE_HW_SERIAL
 //#include "aes_secret.h"
 
