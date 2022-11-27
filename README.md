@@ -46,6 +46,6 @@ reset init
 - **4.)** Upload code with `/usr/local/bin/openocd -f interface/stlink-dap.cfg -f target/efm32.cfg -c "program /path/to/.elf verify reset exit"`
 
 ### :warning: ST-Link V2 Firmware (Bug?)
-After upgrading the firmware of my ST-Link V2 from V2J**29S7** to V2J**38S7** (or newer) it was no longer possible for me to unlock debug access!<br/>
+After upgrading the firmware of my ST-Link V2 from V2J**29S7** to V2J**32S7** (or newer) it was no longer possible for me to unlock debug access!<br/>
 I did not find the firmware V2J**29S7** online, but it works with V2J**28S6**, too.<br/>
 So I added this firmware update to the repository ([stsw-link007-V2J28S6.zip](https://github.com/jp112sdl/HM-Sec-SCo-EFM32/raw/master/stsw-link007-V2J28S6.zip)).
