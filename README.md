@@ -1,5 +1,5 @@
 # HM-Sec-SCo-EFM32
-Homebrew firmware for the HM-Sec-SCo, that can also be used with an HmIP-SWDO and HmIP-SWDO-I
+Homebrew firmware for the HM-Sec-SCo, that can also be used with an Livisi WDSo2.0, HmIP-SWDO and HmIP-SWDO-I
 
 - [x] EFM32G200F64 Arduino IDE Integration
   - [x] SPI communication with CC1101 module
