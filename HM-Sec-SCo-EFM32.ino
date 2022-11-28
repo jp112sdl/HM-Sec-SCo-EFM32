@@ -7,11 +7,13 @@
 
 
 //#define USE_HM_SEC_SCO
+#define USE_WDSo2
+
 #define USE_HW_SERIAL
 //#include "aes_secret.h"
 
 
-#ifndef USE_HM_SEC_SCO
+#if (not defined USE_HM_SEC_SCO)
 // HM-Sec-SCo has no external eeprom
 #define STORAGEDRIVER m24mXX<0x0A,512,256>
 #include <WireSoft.h>
@@ -31,8 +33,8 @@ TwoWireSoft Wire(SDA, SCL);
 #define SABOTAGE_PIN          PB8
 #define SABOTAGE_ACTIVE_STATE HIGH
 
-#ifdef USE_HM_SEC_SCO
-//HM-Sec-SCo uses StepUp converter with single AAA battery
+#if (defined USE_HM_SEC_SCO) || (defined USE_WDSo2)
+//HM-Sec-SCo+WDSo2 uses StepUp converter with single AAA battery
 #define BATT_MEASURE_CH   adcSingleInputCh4 //PD4
 #endif
 
