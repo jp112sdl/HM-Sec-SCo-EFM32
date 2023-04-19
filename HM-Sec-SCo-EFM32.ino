@@ -235,6 +235,13 @@ void setup () {
 
   hal.activity.stayAwake(seconds2ticks(5));
 
+  HMID myDevID;
+  sdev.getDeviceID(myDevID);
+  DPRINT(F("ID: "));myDevID.dump();
+  uint8_t myserial[11]; \
+  sdev.getDeviceSerial(myserial); \
+  myserial[10]=0; \
+  DPRINT(F("  Serial: "));DPRINTLN((char*)myserial);
 }
 
 void loop() {
